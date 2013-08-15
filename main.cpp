@@ -15,15 +15,15 @@
 
 int row,col;
 
-char *choices[] =
+char *menu_options[] =
 {
-    " New Game",
-    "Load Game",
-    "  Help   ",
-    " Credits ",
-    "  Exit   ",
+    " Campaign ",
+    "Single Game",
+    "   Help   ",
+    "  Credits  ",
+    "   Exit   ",
 };
-int n_choices = sizeof(choices) / sizeof(char *);
+//int n_choices = sizeof(choices) / sizeof(char *);
 
 
 int ch; //KEYBOARD INPUT
@@ -61,27 +61,48 @@ void menusplash()
 
     attron(COLOR_PAIR(1)| A_BOLD);
 
-    printw("                                                 ");
+    printw("                                                    ");
     printw(version);
-    printw("\n rBME@@@        P@B@B.     .@@B:      :EB@B@2   @@    ;N@B@@@:       vB@@B@G        :B@B@v     ,MB@B@   .L0B@@@B@k");
-    printw(" 7B@U uM       @B@B@      B@B@B     B@@@BF@@B,  @   qB@BUB@@.      M@B@BBB@Bj      i@B@Bi    M@B@B@B8 .B@B@i v@@@ ");
-    printw(" .@BM  q       :@B@i:     :@@@@    ,@B@q@r v@B    B@BO  B        uBi,@M  @B@      @@Brr   B@k@0 B@M  iB@B1 q@@X   ");
-    printw(" ,@@:  7        r@@v       r@@B.    :@@L5  2@@     O@@B1 ;         Mr@@;  :@BL      B@q   U@B B. @B:   @B u; r   ");
-    printw(" ,@B  S,        7@@i    r@BB.2@G    iB@i@7F@@L      :F@B@Bq          B@, u N@B      @@P   @B2 uB@@S    @@O@@i   ");
-    printw(" ,B@r   Bi      u@B 1;  @MY@:.B@    i@@ F@B@B      Lu7:.k@B@         @BL   @@@      B@,.X B@X  ;  .J   @Bui@ .5  ");
-    printw(" :@B  Pi@B    ,.SB@L8:    @LGB@@v   iB@i r@B@     @@@Bq .B@B         @@  u:B@0   .,i@BOu5 rB@:   5YB   B@:  Mr@ ");
-    printw(" iB@X  2B@    B7:@B:  F@7@B P:i@B   :@B:  B@B     B@@    @B@        ,@B5 7B@B    5B @@j.   @B@:: vB@   @BX.  B@ ");
-    printw(":B@B@B@B@B    .M@B@Y  @B@BuqE rB@Z  @B@MMjBB@Bi    8@B@B@B8         LB@B@B@B,     EB@B@     ZB@B@B@   MB@B@B@B@B ");
-    printw(":u;ir77rrL.    rL77F  .q1  .  irru :2v7J. 7v7Fj      :7v:           Y;:rii         u77ur      iL7.   :5vr7vYL77qi");
-    printw("                                                             (( _______ ");
-    printw("                                                   _______     /\\O    O\\ ");
-    printw("                                                  /O     /\\   /  \\      \\ ");
-    printw("                                                 /   O  /O \\ / O  \\O____O\\ )) ");
-    printw("                                              ((/_____O/    \\\\    /O     / ");
-    printw("                                                \\O    O\\    / \\  /   O  / ");
-    printw("                                                        \\O    O\\ O/   \\/_____O/ ");
-    printw("                                                  \\O____O\\/ ))       )) ");
-    printw("                                                (( ");
+    printw("\n                 i@BL .M@B@             B@MPUZBB          LBuBv             uB@B@@7                ,XBOMk7,\n");
+    printw("                  r@B@B@B@B@            i@B@B@@:         uB@B@Bi          P@B@B@B@B@L            FB@B@@@@@B@:\n");
+    printw("                   7@B@O   @@           ZB@B@B@Y         B@:OB@B        M@@B@@@N0B@B@B          @B@B@7XB@B@Y \n");
+    printw("                   i@@BM    B           L@B@B@ @         @B2B@@@7      OB@B@B@@.   @B@B        7@@B@@  ,B@.\n");
+    printw("                   i@B@B@   @            r@B@@ O          SB@B@Bi       rB@B@ @B@7 i@B@. ,@j   J@B@B@M  ,B  \n");
+    printw("                   rB@BJ   YF             B@@@Yv           @OB@@1        @B@5.@    GB@B, @@:    B@B@@0i  Y  \n");
+    printw("                   i@@@J  :E              @@@@u        i7 LB :@B@        B@BS7@.  YB@@@  B@     :B@B@B@B@M: \n");
+    printw("                   rB@BY vBv7r            @@B@:7.     B@B@B@ 7B@Bi       @@@0 @@@@B@@@: j@         iP@B@B@B@ \n");
+    printw("                   i@B@O:    @@.          @B@B  @r    @B v@B, B@@B       B@BM iB@B@B@M  i:      1PY  ,.Y@B@@B\n");
+    printw("                   iB@B1  Si 2B@         ;@@B@  @@    .: @B@M.B@B@       @B@E ..@@B@@@        :@B@B@@   B@@@B \n");
+    printw("                   u@B@Y  jB@B@B      iLu OB@B@B@       @B1 @B@B@Bu      B@@@J  .B@B@.        @@@@L7U7  @B@B@ \n");
+    printw("                   uB@B@    .@B@      k@q M@B@.:   MBu:@B@  q@ NB@B      @B@B  , kB@Bu        B@BBk  .   @B@B \n");
+    printw("                   7@B@B@E::OB@B       OE @B@B    uB@B@B@rrB1,  @@@r     B@B@ XBJ.@B@@i        B@@@.@Bu5@@@B  \n");
+    printw("                 .M@B@B@B@B@B@B@1       B@B@B@Bu  i@B@B@q7vUJ. MB@@@M  LB@B@B@SJrFB@B@B@:       u@B@B@B@B@U  \n");
+    printw("                 .ZuLvvvLvLLLvLJL       vXuYJJqE   iMBN.  r::  U7rrvk  P0jjYuSY,,12YJY1OJ          :LjLi.  \n");
+    printw("\n\n\n\n\n");
+    printw("                             .iv7vJiJ              YuY7ivJE          :2MBBX:         ,i2S0S5J7, \n");
+    printw("                           F@B@B@@@B@Bi            u@B@B@Bj        J@@@B@B@Bq    v@B@B@B@B@B@@@@  \n");
+    printw("                          G@B@B@B@U@B@@@i          GB@B@B@u      .B@B@B@B@B@@   8@B@B@B:   @B@@@: \n");
+    printw("                          7@@B. @Bi  v@B@M         v@B@@@ @     :B@@@B2:0B@B@,  .5@B@@@:  YM@B@B \n");
+    printw("                           @@  ZB@B,  1@B@B         r@B@B G    .B@B7 @B: GB@B     @@B@1@B @@B@8  \n");
+    printw("                           @@:@B@B    1:@B@i         B@@@Yv    B@B@  @,  N@BB     @B@M  @  O.  \n");
+    printw("                              8@B@   O  B@B@         @B@Bu     @B@v ,@FiO@BM      B@B@.@B r,  \n");
+    printw("                              v@@B ,@2r BB@B         B@B@:7.  :B@Bi  :@B@B@r      @B@B@@@BYiv  \n");
+    printw("                              J@B@7.   2@@@@         @B@B  @r  @B@r   i,   rB     B@BM LB@  J@ \n");
+    printw("                              vB@B  :X  @B@B        iB@B@  B@  @@@@  U   M  @v    @@@B:  B@  B, \n");
+    printw("                             .X@B@   @E@B@@U     iLu OB@B@B@   LB@B57    @B@BO    B@B@    B@B@v \n");
+    printw("                             ,@@@B:   @B@@@      S@N M@B@.:     @B@B0 .   1B@:    @B@B.     NB@ \n");
+    printw("                              2@B@B@B@B@B@.       OZ @B@B        @@@@@B@B@B@N     B@B@B@kY:5B@B,\n");
+    printw("                             N@B@B@@@B@Bq          B@B@B@BU       LB@B@@@B@7    uB@B@B@B@B@@@B@Br \n");
+    printw("                            .NL7r7L7r;.            7XuLYjqG         .rj27,      N0JYLYLjYujuYJjMO \n\n");
+    printw("                                                              (( _______ \n");
+    printw("                                                   _______     /\\O    O\\ \n");
+    printw("                                                  /O     /\\   /  \\      \\ \n");
+    printw("                                                 /   O  /O \\ / O  \\O____O\\ )) \n");
+    printw("                                              ((/_____O/    \\\\    /O     / \n");
+    printw("                                                \\O    O\\    / \\  /   O  / \n");
+    printw("                                                 \\O    O\\ O/   \\/_____O/ \n");
+    printw("                                                  \\O____O\\/ ))       )) \n");
+    printw("                                                 (( \n\n\n\n");
     attroff(COLOR_PAIR(1));
     printw("                                                  PRESS SPACE TO CONTINUE                                               ");
 
@@ -135,7 +156,7 @@ void menusplash()
     printw("                  100   00  00   101 00   11  00    00          00 01    01 00    00  0    01      01       \n");
     printw("                   1000001  0000001  1000000  00    00    0001100  1000000   0000100  0    1000000  000000  \n");
     printw("                            00                                                                              \n");
-    printw("                            00 Source-Code available on: https://github.com/Paradux/Loose-Cannons           \n");
+    printw("                            00 Source-Code available on: https://github.com/Paradux/liars-dice           \n");
     printw("                            00                                                                              \n");
     printw("                                        \n\n\n\n\n");
     attroff(COLOR_PAIR(5));
@@ -146,9 +167,9 @@ void menusplash()
 
 
     refresh();
-//menu:
-WINDOW *my_win;
-int startx, starty, width, height;
+
+
+
 
 
 //// MAIN MENU
@@ -158,19 +179,7 @@ int startx, starty, width, height;
 
 
 
-     printw("   Y.  i:                                                    iL;                 \n");
-     printw("   BB@B@BM                                                 q@@B@B                \n");
-     printw("    @B@  @,                                               @B@B@B@J                 \n");
-     printw("    B@Bi iv                                              @@OBLi@BF                \n");
-     printw("    @B@. 7:     ,j5      .u1      .vv:    .rSUv.        LB@ @, B@i    Yr    YriLu2iU 7r:YJ1:5    rXi   Lr:Lj1:F    :jr:  \n");
-     printw("    B@Z  u     MB@U@;   O@B5Br   @B@B@u  @B@:MB@        B@r B r@B    @B@v   .@B@;@B7 .B@Br@@7  iB@L@@  .B@BrB@v  .B@B@@.  \n");
-     printw("    @BO S7r   uBEZ E@  Y@0O GB  .B@,.O   @@B Y@B        @Bi rB@Bi    L@B8    7@B  @   7B@  B   B@B  @2  7@@  B   X@B 2;   \n");
-     printw("    B@B   B@  @@   YBL @B   L@j  @B@.    J@:v,.         B@r  .  i7    O@@    :@@L B   :@BY @  v@:   B@  :@BJ @   iB@u,    \n");
-     printw("    @BO ;vY@  @B   v@F B@   LBZ   JB@B:  u@B@,          8BB . .ur@  @Buv@    ruv@j@   rYL@uB  0B.  ,@B  rJLBuB    ,k@@@   \n");
-     printw("    B@B  1B@  B@   iBu @B   i@5 ,@E :@B  2B:Li7         .@BO   JB@  7GMv@r   vX @@B   7X @B@  U@,   @@  7P @@@   5M5 OBE  \n");
-     printw("    @B@M  @@  0@r  B@  P@r  @B  @Bv  B@  u@  i@.         P@@@Grq@.  :@iB@O  7B@  B@  7@B  @B   B@  v@P ;@B  @B   B@: :@B  \n");
-     printw("   O@@B@B@B@0  @@Gj@X   B@EuBN  j@0Fk@S  8B@jrBO          u@B@B@7 @@BGj M@ :B@Eu.YB :@B8j,L@.  FBO1@B :@B8j,v@.  @BU2@B,  \n");
-     printw("   uriiiriirr   5@@i     1@@i    :M@@i  ,B@B@@@B.           ivi   7BF i PBu B5 7. X  MF v. k    iB@F   MS 7. k    L@@E \n");
+
     attroff(A_BOLD);
     while(1)
     {
@@ -183,12 +192,12 @@ int startx, starty, width, height;
             if(highlight ==i+1)
             {
                 attron(COLOR_PAIR(3));
-             mvprintw(20+i,55,choices[i]);
+                mvprintw(20+i,55,menu_options[i]);
                 attroff(COLOR_PAIR(3));
             }
             else
             {
-                  mvprintw(20+i,55,choices[i]);
+                mvprintw(20+i,55,menu_options[i]);
 
             }
 
@@ -239,29 +248,34 @@ int startx, starty, width, height;
 
 
 //MAIN MENU
-if(highlight==1){
-clear();
-refresh();
+    if(highlight==1)
+    {
+        clear();
+        refresh();
 
-}
-if(highlight==2){
-clear();
-refresh();
+    }
+    if(highlight==2)
+    {
+        clear();
+        refresh();
 
-}
-if(highlight==3){
-clear();
-refresh();
+    }
+    if(highlight==3)
+    {
+        clear();
+        refresh();
 
-}
-if(highlight==4){
-clear();
-refresh();
+    }
+    if(highlight==4)
+    {
+        clear();
+        refresh();
 
-}
-if(highlight==5){
-    exit;
-}
+    }
+    if(highlight==5)
+    {
+        exit;
+    }
 
 
 
