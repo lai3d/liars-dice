@@ -1,7 +1,6 @@
 #include <iostream>
 #include <curses.h>
 //change this to cursus.h while working on windows and to ncurses.h while working on linux
-// also to setup Ncurses and PDcurses: Settings > Compiler > Linker Settings and add either pdcurses.a (WINDOWS)or /lib/libncurses.a (LINUX)
 #include <cstdlib>
 #include <string.h>
 #include <stdio.h>
@@ -12,9 +11,7 @@
 #define version "pre-alpha build v0.0.1"
 
 //using namespace std;
-
-int row,col;
-int i;
+//GLOBAL VARIABLES
 char *menu_options[] =
 {
     " Campaign ",
@@ -32,31 +29,12 @@ char *contributors[] =
 };
 int n_contributors = sizeof(contributors) / sizeof(char *);
 
-
-int ch; //KEYBOARD INPUT
+int ch;
 int highlight = 1;
+int row,col;
+int i;
 
-void campaign()
-{
-
-}
-void single_game()
-{
-
-}
-void credits()
-{
-    printw("This game is open-source, all contributors:\n\n");
-    for(i=0; i<n_contributors; i++)
-    {
-        printw(contributors[i]);
-
-
-
-    }
-    getch();
-}
-
+//FUNCTIONS
 void spacecontinue()
 {
     ch = getch();
@@ -75,6 +53,32 @@ void spacecontinue()
 
 }
 
+void campaign()
+{
+
+}
+void single_game()
+{
+
+}
+void help()
+{
+    printw("Blah blaaaabhalbala\n");
+    spacecontinue();
+}
+void credits()
+{
+    printw("This game is open-source, all contributors:\n\n");
+    for(i=0; i<n_contributors; i++)
+    {
+        printw(contributors[i]);
+
+
+
+    }
+    spacecontinue();
+}
+
 void menusplash()
 {
     start_color();
@@ -85,7 +89,7 @@ void menusplash()
     init_pair(4, COLOR_BLACK, COLOR_RED);
     init_pair(5, COLOR_GREEN, COLOR_BLACK);
 
-    curs_set(0); //make cursor invisible
+
 
     attron(COLOR_PAIR(1)| A_BOLD);
 
@@ -134,11 +138,9 @@ void menusplash()
     attroff(COLOR_PAIR(1));
     printw("                                                  PRESS SPACE TO CONTINUE                                               ");
 
-
     refresh();			/* Print it on to the real screen */
     spacecontinue();
     clear();
-
 
     attron(COLOR_PAIR(5));
     printw("                                                                                                    \n");
@@ -190,16 +192,12 @@ void menusplash()
     attroff(COLOR_PAIR(5));
 
     printw("                                                  PRESS SPACE TO CONTINUE                     ");
+    refresh();
     spacecontinue();
 menu:
     clear();
 
-
-
     attron(A_BOLD);
-
-
-
 
 //// MAIN MENU
     printw("           B@BY.iO@B@M              iBOB5POB@.          .M@j@S              :5@B@B@M7                 .rE@B@OFYi: \n");
@@ -225,11 +223,6 @@ menu:
     printw("                          5B@B@B@B@B@B@Z        .BE @B@BB        ;@B@@@B@@B@@BZ     vB@@@B@BZ7:2@B@M      \n");
     printw("                        .@@@B@B@B@B@8v            B@B@B@B@5        :5@@@B@B@u     i@B@B@B@B@B@@@B@B@B:\n");
     refresh();
-
-
-
-
-
     attroff(A_BOLD);
     while(1)
     {
@@ -292,12 +285,6 @@ menu:
         refresh();
     }
 
-
-
-
-
-
-
     if(highlight==1)
     {
         clear();
@@ -326,31 +313,23 @@ menu:
     {
         exit;
     }
-
-
-
-
-
-
+// ON SPACEBAR PRESS:
     if(highlight==1)
     {
         clear();
-        printw("This mode is currently unavailable :(");
-        getch();
+        campaign();
         goto menu;
     }
     if(highlight==2)
     {
         clear();
-        printw("This mode is currently unavailable :(");
-        getch();
+        single_game();
         goto menu;
     }
     if(highlight==3)
     {
         clear();
-        printw("This mode is currently unavailable :(");
-        getch();
+        help();
         goto menu;
     }
     if(highlight==4)
@@ -363,24 +342,20 @@ menu:
 
 }
 
-
-
 int main()
 {
 // PDCURSES/NCURSES INITIALIZING//
-
     initscr();			/* Start curses mode 		*/
     getmaxyx(stdscr,row,col);
-    raw();/* Line buffering disabled	*/
+    //raw();/* Line buffering disabled	*/
     keypad(stdscr, TRUE);		/* We get key input		*/
     noecho();			/* Don't echo() while we do getch */
-    refresh();
+    curs_set(0); //make cursor invisible
     resize_term(50, 125);
     refresh();
 //STARTING MENU
     menusplash();
 
-    refresh();
 // ENDING APPLICATION
     endwin();			/* End curses mode		  */
     return 0;
