@@ -14,7 +14,7 @@
 //using namespace std;
 
 int row,col;
-
+int i;
 char *menu_options[] =
 {
     " Campaign ",
@@ -23,11 +23,39 @@ char *menu_options[] =
     "  Credits  ",
     "   Exit   ",
 };
-//int n_choices = sizeof(choices) / sizeof(char *);
+int n_menu_options = sizeof(menu_options) / sizeof(char *);
+
+char *contributors[] =
+{
+    "Programming and ASCII-art: Paradux\n",
+    "[enter function here: ][enter name here]",
+};
+int n_contributors = sizeof(contributors) / sizeof(char *);
 
 
 int ch; //KEYBOARD INPUT
 int highlight = 1;
+
+void campaign()
+{
+
+}
+void single_game()
+{
+
+}
+void credits()
+{
+    printw("This game is open-source, all contributors:\n\n");
+    for(i=0; i<n_contributors; i++)
+    {
+        printw(contributors[i]);
+
+
+
+    }
+    getch();
+}
 
 void spacecontinue()
 {
@@ -163,18 +191,40 @@ void menusplash()
 
     printw("                                                  PRESS SPACE TO CONTINUE                     ");
     spacecontinue();
+menu:
     clear();
 
 
-    refresh();
 
+    attron(A_BOLD);
 
 
 
 
 //// MAIN MENU
-
-
+    printw("           B@BY.iO@B@M              iBOB5POB@.          .M@j@S              :5@B@B@M7                 .rE@B@OFYi: \n");
+    printw("            :@B@B@Pvu@B              @B@B@B@u          iB@q@B@M          :P@B@B@B@@@B@Z,            1@B@B@@@B@B@@. \n");
+    printw("             O@B@B    PB            :@@B@B@ @          0@BiB@B@B       :@B@B@B@B2  :8B@B@          B@@@B@  :@B@,   \n");
+    printw("             MB@B@M:  .@             .0@B@B B.          :EB@B@B@        :@B@B@ @B1k  0B@BU  5@:    @B@B@Bq   j8    \n");
+    printw("             O@B@0    M                B@B@u:            r@iNB@@         J@B@j,B     B@B@u .@B     J@B@B@@O5:j,     \n");
+    printw("             MB@BZ  YBi.              .@B@@v        2@B@G@B i@@@M        SB@Bk @@NuZB@B@O  @B        .rX@@@@B@B@i   \n");
+    printw("             M@B@@,,    @Bi           ;B@B@  S@     @Bi @B@  O@@@;       5@@@Z :@B@B@B@B   L       rJvr..::7MB@@@M  \n");
+    printw("             M@@B8   @: B@B          :J@B@@2 EB        2B52@1@@@B@       kB@B8.  vB@B@BO         r@@B@@@Bi  OBB@B@. \n");
+    printw("             B@B@B    L5@@@       UB@  B@B@jEj   jZ. J@B@  B@.X@@@v      u@B@B:   :B@B@:         M@B@1L  ,   M@B@B  \n");
+    printw("             @B@B@B@1:rBB@B        SB Y@B@B     B@@@B@B@ @B2:  @B@@:     OB@B@ :BN SB@B@2         O@@@B,@@PX8@B@B   \n");
+    printw("           Z@B@B@B@@@B@@@B@B        1B@B@B@@@.  2B@B@BL,ruL7  NB@@@B@. Y@B@B@B@OLvvB@B@@@B@         r0@B@@@B@OL     \n\n");
+    printw("                         :rvv7LY;U.               LUvY:Y7Fv           :jPOOZU:         .,;J0GMq1J7i.      \n");
+    printw("                      UB@B@@@B@B@B@Mr             @B@B@B@B,        r@B@B@B@@@B@    1@B@@@@@BNE@B@B@B@     \n");
+    printw("                      B@B@S:M@Ei,vB@@@8.          B@B@B@u78      rB@@@B@5OB@B@B7   BB@B@B@O   ,@B@B@O     \n");
+    printw("                      iB@  7@B@0   L@B@Bu          r@B@Br @     MB@Bi @Bj  B@@@,    .B@@@JS@r MB@BMr      \n");
+    printw("                       @Y B@B@G   ,Y @B@Bi          8@B@EY     ZB@BJ .B2  :@B@J     .@B@B  @B  1          \n");
+    printw("                          :B@B8 .S8. i@B@@          MB@B@..    B@B@   5B@B@B@r      ,@@@@B@B@L1.          \n");
+    printw("                          :@@@B..   .@B@B@          B@B@2 .@v  @B@B    i7    .B     ,@B@B:rFB@  :@        \n");
+    printw("                          :B@BO  ,@  B@B@q        .i@@@B@ ,B0  7@@@M .i   iB .@@    ,@@B@.   M@  BO       \n");
+    printw("                         :M@B@O   r@B@B@B      :B@E N@B@O2G.    N@B@B0     iB@BO     @B@B,     Y@@B       \n");
+    printw("                          5B@B@B@B@B@B@Z        .BE @B@BB        ;@B@@@B@@B@@BZ     vB@@@B@BZ7:2@B@M      \n");
+    printw("                        .@@@B@B@B@B@8v            B@B@B@B@5        :5@@@B@B@u     i@B@B@B@B@B@@@B@B@B:\n");
+    refresh();
 
 
 
@@ -185,19 +235,19 @@ void menusplash()
     {
 
         refresh();
-        for(int i = 0; i<5; i++)
+        for(i = 0; i<n_menu_options; i++)
         {
 
 
             if(highlight ==i+1)
             {
                 attron(COLOR_PAIR(3));
-                mvprintw(20+i,55,menu_options[i]);
+                mvprintw(30+i,55,menu_options[i]);
                 attroff(COLOR_PAIR(3));
             }
             else
             {
-                mvprintw(20+i,55,menu_options[i]);
+                mvprintw(30+i,55,menu_options[i]);
 
             }
 
@@ -247,7 +297,7 @@ void menusplash()
 
 
 
-//MAIN MENU
+
     if(highlight==1)
     {
         clear();
@@ -277,6 +327,38 @@ void menusplash()
         exit;
     }
 
+
+
+
+
+
+    if(highlight==1)
+    {
+        clear();
+        printw("This mode is currently unavailable :(");
+        getch();
+        goto menu;
+    }
+    if(highlight==2)
+    {
+        clear();
+        printw("This mode is currently unavailable :(");
+        getch();
+        goto menu;
+    }
+    if(highlight==3)
+    {
+        clear();
+        printw("This mode is currently unavailable :(");
+        getch();
+        goto menu;
+    }
+    if(highlight==4)
+    {
+        clear();
+        credits();
+        goto menu;
+    }
 
 
 }
