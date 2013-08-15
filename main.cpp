@@ -7,14 +7,13 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-
+#include <panel.h>
 #define version "pre-alpha build v0.0.1"
 
 //using namespace std;
 //GLOBAL VARIABLES
 char *menu_options[] =
 {
-    " Campaign ",
     "Single Game",
     "   Help   ",
     "  Credits  ",
@@ -29,12 +28,61 @@ char *contributors[] =
 };
 int n_contributors = sizeof(contributors) / sizeof(char *);
 
+char *difficulties[] =
+{
+    "Beginner",
+    "Easy",
+    "Medium",
+    "Hard",
+    "INSANE",
+};
+int n_difficulties = sizeof(difficulties) / sizeof(char *);
+
+char *opponents[] =
+{
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+};
+int n_opponents = sizeof(opponents) / sizeof(char *);
+
+char *startingdice[] =
+{
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+};
+int n_startingdice = sizeof(startingdice) / sizeof(char *);
+
+char *gamemode[] =
+{
+    "Re-assert",
+    "Reset",
+    "Restrictive",
+};
+int n_gamemode = sizeof(gamemode) / sizeof(char *);
+
+int d1,d2,d3,d4,d5,d6,d7,d8,d9,d10;
 int ch;
 int highlight = 1;
 int row,col;
 int i;
+int sel_difficulty,sel_opponents,sel_startingdice,sel_gamemode;
+//FUNCTION PROTOTYPES
+void menu();
+void exit();
 
 //FUNCTIONS
+void exit(){
+
+std::exit;
+}
 void spacecontinue()
 {
     ch = getch();
@@ -60,6 +108,309 @@ void campaign()
 void single_game()
 {
 
+    printw("Set-up:\n");
+    refresh();
+difficulty:
+     int highlight = 3;
+    while(1)
+    {
+
+        move(1,0);
+        printw("Difficulty: ");
+        for(i = 0; i<n_difficulties; i++)
+        {
+
+            if(highlight ==i+1)
+            {
+
+                attron(A_REVERSE);
+                printw(difficulties[i]);
+                attroff(A_REVERSE);
+                printw(" ");
+            }
+            else
+            {
+                printw(difficulties[i]);
+                printw(" ");
+            }
+
+        }
+        ch = getch();
+
+        if(ch==KEY_RIGHT)
+        {
+            highlight++;
+            if(highlight>5)
+            {
+                highlight = 1;
+            }
+            deleteln();
+            move(1,0);
+
+            // goto menu;
+
+        }
+        else if(ch==KEY_LEFT)
+        {
+            highlight--;
+            if(highlight<1)
+            {
+                highlight = n_difficulties;
+            }
+            deleteln();
+            move(1,0);
+            //  goto menu;
+        }
+        else if(ch==KEY_UP){
+            clear();
+            menu();
+
+        }
+        else
+        {
+
+            move(1,0);
+            //  goto menu;
+        }
+
+
+        if(ch==' ')
+        {
+            break;
+
+        }
+
+        refresh();
+    }
+    sel_difficulty=highlight;
+
+
+opponents:
+     highlight = 1;
+    while(1)
+    {
+
+        move(2,0);
+        printw("Number of opponents: ");
+        for(i = 0; i<n_opponents; i++)
+        {
+
+            if(highlight ==i+1)
+            {
+
+                attron(A_REVERSE);
+                printw(opponents[i]);
+                attroff(A_REVERSE);
+                printw(" ");
+            }
+            else
+            {
+                printw(opponents[i]);
+                printw(" ");
+            }
+
+        }
+        ch = getch();
+
+        if(ch==KEY_RIGHT)
+        {
+            highlight++;
+            if(highlight>n_opponents)
+            {
+                highlight = 1;
+            }
+            deleteln();
+            move(2,0);
+
+            // goto menu;
+
+        }
+        else if(ch==KEY_UP)
+        {
+            deleteln();
+            goto difficulty;
+        }
+        else if(ch==KEY_LEFT)
+        {
+            highlight--;
+            if(highlight<1)
+            {
+                highlight = n_opponents;
+            }
+            deleteln();
+            move(2,0);
+            //  goto menu;
+        }
+        else
+        {
+
+            move(2,0);
+            //  goto menu;
+        }
+
+
+        if(ch==' ')
+        {
+            break;
+
+        }
+
+        refresh();
+    }
+
+    sel_opponents=highlight;
+
+startingdice:
+    highlight =5;
+    while(1)
+    {
+
+        move(3,0);
+        printw("Number of starting dice: ");
+        for(i = 0; i<n_startingdice; i++)
+        {
+
+            if(highlight ==i+1)
+            {
+
+                attron(A_REVERSE);
+                printw(startingdice[i]);
+                attroff(A_REVERSE);
+                printw(" ");
+            }
+            else
+            {
+                printw(startingdice[i]);
+                printw(" ");
+            }
+
+        }
+        ch = getch();
+
+        if(ch==KEY_RIGHT)
+        {
+            highlight++;
+            if(highlight>n_startingdice)
+            {
+                highlight = 1;
+            }
+            deleteln();
+            move(3,0);
+
+            // goto menu;
+
+        }
+        else if(ch==KEY_LEFT)
+        {
+            highlight--;
+            if(highlight<1)
+            {
+                highlight = n_startingdice;
+            }
+            deleteln();
+            move(3,0);
+            //  goto menu;
+        }
+        else if(ch==KEY_UP)
+        {
+            deleteln();
+            goto opponents;
+        }
+        else
+        {
+
+            move(3,0);
+            //  goto menu;
+        }
+
+
+        if(ch==' ')
+        {
+            break;
+
+        }
+
+        refresh();
+    }
+    sel_gamemode=highlight;
+
+gamemode:
+        highlight = 1;
+    while(1)
+    {
+
+        move(4,0);
+        printw("Gamemode (See help for more info): ");
+        for(i = 0; i<n_gamemode; i++)
+        {
+
+            if(highlight ==i+1)
+            {
+
+                attron(A_REVERSE);
+                printw(gamemode[i]);
+                attroff(A_REVERSE);
+                printw(" ");
+            }
+            else
+            {
+                printw(gamemode[i]);
+                printw(" ");
+            }
+
+        }
+        ch = getch();
+
+        if(ch==KEY_RIGHT)
+        {
+            highlight++;
+            if(highlight>n_gamemode)
+            {
+                highlight = 1;
+            }
+            deleteln();
+            move(4,0);
+
+            // goto menu;
+
+        }
+        else if(ch==KEY_UP)
+        {
+            deleteln();
+            goto startingdice;
+        }
+        else if(ch==KEY_LEFT)
+        {
+            highlight--;
+            if(highlight<1)
+            {
+                highlight = n_gamemode;
+            }
+            deleteln();
+            move(4,0);
+            //  goto menu;
+        }
+        else
+        {
+
+            move(4,0);
+            //  goto menu;
+        }
+
+
+        if(ch==' ')
+        {
+            break;
+
+        }
+
+        refresh();
+    }
+
+    sel_gamemode=highlight;
+clear();
+
+
 }
 void help()
 {
@@ -72,15 +423,13 @@ void credits()
     for(i=0; i<n_contributors; i++)
     {
         printw(contributors[i]);
-
-
-
     }
     spacecontinue();
 }
 
 void menusplash()
 {
+
     start_color();
 
     init_pair(1, COLOR_RED, COLOR_BLACK);
@@ -194,9 +543,12 @@ void menusplash()
     printw("                                                  PRESS SPACE TO CONTINUE                     ");
     refresh();
     spacecontinue();
-menu:
+clear();
+}
+void menu(){
+    menu:
     clear();
-
+highlight=1;
     attron(A_BOLD);
 
 //// MAIN MENU
@@ -250,7 +602,7 @@ menu:
         if(ch==KEY_DOWN)
         {
             highlight++;
-            if(highlight>5)
+            if(highlight>n_menu_options)
             {
                 highlight = 1;
             }
@@ -264,7 +616,7 @@ menu:
             highlight--;
             if(highlight<1)
             {
-                highlight = 5;
+                highlight = n_menu_options;
             }
             clrtobot();
             //  goto menu;
@@ -303,47 +655,45 @@ menu:
         refresh();
 
     }
+
     if(highlight==4)
     {
-        clear();
-        refresh();
 
-    }
-    if(highlight==5)
-    {
-        exit;
+        exit();
     }
 // ON SPACEBAR PRESS:
+
     if(highlight==1)
     {
         clear();
-        campaign();
-        goto menu;
+        single_game();
+
     }
     if(highlight==2)
-    {
-        clear();
-        single_game();
-        goto menu;
-    }
-    if(highlight==3)
     {
         clear();
         help();
         goto menu;
     }
-    if(highlight==4)
+    if(highlight==3)
     {
         clear();
         credits();
         goto menu;
     }
+  if(highlight==4)
+    {
 
+       exit();
+    }
 
 }
 
 int main()
 {
+//INITALIZE RANDOM SEED
+srand ( time(NULL));
+
 // PDCURSES/NCURSES INITIALIZING//
     initscr();			/* Start curses mode 		*/
     getmaxyx(stdscr,row,col);
@@ -355,7 +705,7 @@ int main()
     refresh();
 //STARTING MENU
     menusplash();
-
+    menu();
 // ENDING APPLICATION
     endwin();			/* End curses mode		  */
     return 0;
