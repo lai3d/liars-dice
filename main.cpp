@@ -74,6 +74,7 @@ int highlight = 1;
 int row,col;
 int i;
 int sel_difficulty,sel_opponents,sel_startingdice,sel_gamemode;
+int returnmenu;
 //FUNCTION PROTOTYPES
 void menu();
 void exit();
@@ -162,7 +163,8 @@ difficulty:
             //  goto menu;
         }
         else if(ch==KEY_UP){
-            clear();
+
+            returnmenu = 1;
             menu();
 
         }
@@ -547,12 +549,18 @@ clear();
 }
 void menu(){
     menu:
+    if(returnmenu==1){
+        clear();
+        returnmenu=0;
+
+
+    }
     clear();
 highlight=1;
     attron(A_BOLD);
 
 //// MAIN MENU
-    printw("           B@BY.iO@B@M              iBOB5POB@.          .M@j@S              :5@B@B@M7                 .rE@B@OFYi: \n");
+    printw("\n           B@BY.iO@B@M              iBOB5POB@.          .M@j@S              :5@B@B@M7                 .rE@B@OFYi: \n");
     printw("            :@B@B@Pvu@B              @B@B@B@u          iB@q@B@M          :P@B@B@B@@@B@Z,            1@B@B@@@B@B@@. \n");
     printw("             O@B@B    PB            :@@B@B@ @          0@BiB@B@B       :@B@B@B@B2  :8B@B@          B@@@B@  :@B@,   \n");
     printw("             MB@B@M:  .@             .0@B@B B.          :EB@B@B@        :@B@B@ @B1k  0B@BU  5@:    @B@B@Bq   j8    \n");
@@ -641,51 +649,28 @@ highlight=1;
     {
         clear();
         refresh();
-
-    }
-    if(highlight==2)
-    {
-        clear();
-        refresh();
-
-    }
-    if(highlight==3)
-    {
-        clear();
-        refresh();
-
-    }
-
-    if(highlight==4)
-    {
-
-        exit();
-    }
-// ON SPACEBAR PRESS:
-
-    if(highlight==1)
-    {
-        clear();
         single_game();
 
     }
     if(highlight==2)
     {
         clear();
+        refresh();
         help();
         goto menu;
+
     }
     if(highlight==3)
     {
         clear();
-        credits();
+         credits();
         goto menu;
-    }
-  if(highlight==4)
-    {
 
-       exit();
     }
+    if(highlight==4){
+        exit(0);
+    }
+
 
 }
 
